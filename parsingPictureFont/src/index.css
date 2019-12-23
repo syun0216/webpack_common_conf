@@ -1,0 +1,28 @@
+@font-face{
+  font-family: 'SourceHanSerifSC-Heavy';
+  src: url(./assets/SourceHanSerifSC-Heavy.otf);
+}
+
+.outside-font{
+  font-family: 'SourceHanSerifSC-Heavy';
+  font-size: 16px;
+  color: #ff5050;
+}
+
+.logo-in-css {
+  display: block;
+  width: 100px;
+  height: 100px;
+  background: url('./assets/logo.png') no-repeat center;
+  background-size: 100%;
+  color: red;
+}
+
+.icon-in-css {
+  display: block;
+  width: 100px;
+  height: 100px;
+  background: url('./assets/icon.png') no-repeat center;
+  background-size: 100%;
+  color: red;
+}
