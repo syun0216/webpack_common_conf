@@ -1,7 +1,17 @@
 'use strict';
 const path = require('path');
-const webpack = require('webpack');
+const chalk = require('chalk')
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+
+// const flage = {}
+
+// process.argv.slice(2).forEach(arg => {
+//   const [k, v = true] = arg.split('=')
+//   flage[k] = v
+// })
+// console.log(chalk `{red.bold.bgWhite Hello world}`, flage);
+
 
 module.exports = {
   entry: [
@@ -12,17 +22,8 @@ module.exports = {
     filename: '[name].js',
     path: path.join(__dirname, 'dist')
   },
-  mode: 'development',
-  devServer: {
-    compress: true,
-    open: true,
-    host: 'localhost',   
-    port: '9527', 
-    hot: true
-  },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /.js$/,
         use: 'babel-loader'
       },
@@ -36,14 +37,12 @@ module.exports = {
       },
       {
         test: /.(png|jpg|gif|jpeg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10240
-            }
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 10240
           }
-        ]
+        }]
       },
       {
         test: /.(woff|woff2|eot|ttf|otf)$/,
@@ -56,7 +55,7 @@ module.exports = {
       template: path.join(__dirname, 'src/index.html'),
       filename: 'index.html',
       inject: true,
-      chunks: ['main',  'index'],
+      chunks: ['main', 'index'],
       minify: {
         html5: true,
         collapseWhitespace: true,
@@ -66,6 +65,6 @@ module.exports = {
         removeComments: false
       }
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new FriendlyErrorsWebpackPlugin()
   ]
 }
