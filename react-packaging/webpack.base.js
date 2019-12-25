@@ -22,10 +22,25 @@ module.exports = {
     filename: '[name].js',
     path: path.join(__dirname, 'dist')
   },
+  resolve: {
+    extensions: ['.js', '.json'],
+    alias: {
+      '@': path.join(__dirname, 'src')
+    }
+  },
   module: {
     rules: [{
         test: /.js$/,
-        use: 'babel-loader'
+        loader: 'babel-loader',
+        query: {
+          compact: false
+        }
+      },
+      {
+        test: /js$/,
+        enforce: 'pre',
+        include: [path.resolve(__dirname, 'src')],
+        loader: 'eslint-loader'
       },
       {
         test: /.css$/,
