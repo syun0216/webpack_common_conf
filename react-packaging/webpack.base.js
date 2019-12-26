@@ -14,13 +14,16 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 
 module.exports = {
-  entry: [
-    'react-hot-loader/patch',
-    './src/index.js'
-  ],
+  entry: {
+    index: [
+      "babel-polyfill",
+      path.join(__dirname, 'src/index.js')
+    ]
+  },
   output: {
     filename: '[name].js',
-    path: path.join(__dirname, 'dist')
+    path: path.join(__dirname, 'dist'),
+    publicPath: "/",
   },
   resolve: {
     extensions: ['.js', '.json'],
