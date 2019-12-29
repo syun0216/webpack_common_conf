@@ -4,8 +4,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugins = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
+const SpeedMeaurePlugin = require('speed-measure-webpack-plugin'); // loader打包速度
 const baseConfig = require('./webpack.base');
 const merge = require('webpack-merge');
+
+const smp = new SpeedMeaurePlugin()
 
 const prodConfig = {
   output: {
@@ -40,6 +43,6 @@ const prodConfig = {
 };
 
 
-module.exports = merge(baseConfig, prodConfig);
+module.exports = smp.wrap(merge(baseConfig, prodConfig));
 
 
