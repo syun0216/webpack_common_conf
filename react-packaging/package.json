@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
+    "build:stats": "webpack --env production --json > stats.json",
     "eslint": "eslint ./src --fix"
   },
   "keywords": [],

@@ -1,0 +1,26 @@
+{
+  "name": "webpack_common_conf",
+  "version": "1.0.0",
+  "description": "webpack各种配置的实践",
+  "main": "index.js",
+  "scripts": {
+    "commitmsg": "validate-commit-msg",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syun0216/webpack_common_conf.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/syun0216/webpack_common_conf/issues"
+  },
+  "homepage": "https://github.com/syun0216/webpack_common_conf#readme",
+  "devDependencies": {
+    "conventional-changelog-cli": "^2.0.31",
+    "husky": "^3.1.0",
+    "validate-commit-msg": "^2.14.0"
+  }
+}
