@@ -42,6 +42,13 @@ const prodConfig = {
   ]
 };
 
+if(process.env.npm_config_report) { // 是否开启报告模式
+  const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+  prodConfig.plugins.push(new BundleAnalyzerPlugin({
+    generateStatsFile: false
+  }));
+}
+
 
 module.exports = smp.wrap(merge(baseConfig, prodConfig));
 
