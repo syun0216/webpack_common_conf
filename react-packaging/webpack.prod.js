@@ -4,12 +4,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugins = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
-const SpeedMeaurePlugin = require('speed-measure-webpack-plugin'); // loader打包速度
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const baseConfig = require('./webpack.base');
 const merge = require('webpack-merge');
 
-const smp = new SpeedMeaurePlugin()
 
 const prodConfig = {
   entry: {
@@ -73,7 +72,14 @@ const prodConfig = {
       ]
     }),
     new CleanWebpackPlugin()
-  ]
+  ],
+  optimization: {
+    minimizer: [
+      new TerserPlugin({ // 开启并行压缩
+        parallel: 4
+      })
+    ]
+  }
 };
 
 if(process.env.npm_config_report) { // 是否开启报告模式
@@ -83,9 +89,17 @@ if(process.env.npm_config_report) { // 是否开启报告模式
   }));
 }
 
+if(process.env.npm_config_speed) { // 是否展示loader打包速度
+  const SpeedMeaurePlugin = require('speed-measure-webpack-plugin'); // loader打包速度
+  const smp = new SpeedMeaurePlugin()
+  module.exports = smp.wrap(merge(baseConfig, prodConfig));
+}else {
+  module.exports = merge(baseConfig, prodConfig);
+}
 
 
 
-module.exports = smp.wrap(merge(baseConfig, prodConfig));
+
+
 
 
