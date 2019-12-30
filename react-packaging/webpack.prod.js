@@ -5,18 +5,52 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugins = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 const SpeedMeaurePlugin = require('speed-measure-webpack-plugin'); // loader打包速度
+const webpack = require('webpack');
 const baseConfig = require('./webpack.base');
 const merge = require('webpack-merge');
 
 const smp = new SpeedMeaurePlugin()
 
 const prodConfig = {
+  entry: {
+    index: [
+      "babel-polyfill",
+      path.join(__dirname, 'src/index.js')
+    ]
+  },
+  module: {
+    rules: [
+      {
+        test: /.js$/,
+        use: [
+          {
+            loader: 'thread-loader',
+            options: {
+              workers: true, // 多线程
+              cache: true // 缓存
+            }
+          },
+          {
+            loader: 'babel-loader',
+            query: {
+              compact: false
+            }
+          }
+        ]
+      }
+    ]
+  },
   output: {
     filename: '[name]_[chunkhash:8].js',
     path: path.join(__dirname, 'dist')
   },
   mode: 'production',
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': 'production'
+      }
+    }),
     new MiniCssExtractPlugin({
       filename: '[name]_[contenthash:8].css'
     }),
@@ -48,6 +82,8 @@ if(process.env.npm_config_report) { // 是否开启报告模式
     generateStatsFile: false
   }));
 }
+
+
 
 
 module.exports = smp.wrap(merge(baseConfig, prodConfig));

@@ -1,5 +1,6 @@
 const baseConfig = require('./webpack.base');
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 
 const devConfig = {
@@ -8,6 +9,17 @@ const devConfig = {
       'babel-polyfill',
       'react-hot-loader/patch',
       path.join(__dirname, 'src/index.js')
+    ]
+  },
+  module: {
+    rules: [
+      {
+        test: /.js$/,
+        loader: 'babel-loader',
+        query: {
+          compact: false
+        }
+      }
     ]
   },
   devServer: {
@@ -20,6 +32,11 @@ const devConfig = {
   },
   mode: 'development',
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': 'development'
+      }
+    }),
     new webpack.HotModuleReplacementPlugin()
   ]
 }

@@ -12,14 +12,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 // })
 // console.log(chalk `{red.bold.bgWhite Hello world}`, flage);
 
-
 module.exports = {
-  entry: {
-    index: [
-      "babel-polyfill",
-      path.join(__dirname, 'src/index.js')
-    ]
-  },
   output: {
     filename: '[name].js',
     path: path.join(__dirname, 'dist'),
@@ -32,13 +25,7 @@ module.exports = {
     }
   },
   module: {
-    rules: [{
-        test: /.js$/,
-        loader: 'babel-loader',
-        query: {
-          compact: false
-        }
-      },
+    rules: [
       {
         test: /js$/,
         enforce: 'pre',
