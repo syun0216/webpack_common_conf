@@ -21,6 +21,7 @@ const prodConfig = {
     rules: [
       {
         test: /.js$/,
+        exclude: path.join(__dirname, 'node_modules'),
         use: [
           {
             loader: 'thread-loader',
@@ -79,6 +80,15 @@ const prodConfig = {
         parallel: 4
       })
     ]
+  },
+  resolve: {
+    alias: {
+      'react-dom': './node_modules/react-dom/umd/react-dom.production.min.js',
+      'react': './node_modules/react/umd/react.production.min.js'
+    },
+    modules: [path.resolve(__dirname, 'node_modules')],
+    extensions: ['js'],
+    mainFields: ['main']
   }
 };
 
