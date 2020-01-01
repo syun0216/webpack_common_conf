@@ -9,6 +9,7 @@
     "build:report": "npm_config_report=true npm run build",
     "build:speed": "npm_config_speed=true npm run build",
     "build:stats": "webpack --env production --json > stats.json",
+    "dll": "webpack --config webpack.dll.js",
     "eslint": "eslint ./src --fix"
   },
   "keywords": [],
@@ -25,6 +26,7 @@
     "babel-polyfill": "^6.26.0",
     "chalk": "^3.0.0",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.0",
     "cssnano": "^4.1.10",
     "eslint": "^6.8.0",
