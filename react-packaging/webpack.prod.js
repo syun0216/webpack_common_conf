@@ -90,7 +90,19 @@ const prodConfig = {
       new TerserPlugin({ // 开启并行压缩
         parallel: 4
       })
-    ]
+    ],
+    splitChunks: { // 公用的模块进行统一的分离，第三方包进行使用dllplugin进行分离
+      minSize: 0,
+      chunks: 'all',
+      cacheGroups: {
+        commons: {
+          name: 'commons', 
+          chunks: 'all', 
+          test: /\/src/,
+          minChunks: 2
+        } 
+      }
+    }
   },
   resolve: {
     // alias: {
