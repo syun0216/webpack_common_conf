@@ -25,8 +25,7 @@ module.exports = {
     }
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /js$/,
         enforce: 'pre',
         include: [path.resolve(__dirname, 'src')],
@@ -46,8 +45,18 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 10240
+          },
+        },
+        {
+          loader: 'image-webpack-loader',  // 压缩图片
+          options: {
+            pngquant: {
+              quality: '65-90',
+              speed: 4
+            }
           }
-        }]
+        }
+      ]
       },
       {
         test: /.(woff|woff2|eot|ttf|otf)$/,
