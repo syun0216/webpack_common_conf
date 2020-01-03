@@ -24,11 +24,15 @@ const prodConfig = {
     rules: [{
       test: /.js$/,
       exclude: path.join(__dirname, 'node_modules'),
-      use: [{
+      use: [
+        {
+          loader: 'cache-loader'
+        },
+        {
           loader: 'thread-loader',
           options: {
-            workers: true, // 多线程
-            cache: true // 缓存
+            workers: true,// 多线程
+            cache: true
           }
         },
         {
@@ -81,6 +85,7 @@ const prodConfig = {
     new CleanWebpackPlugin()
   ],
   optimization: {
+    minimize: true,
     minimizer: [
       new TerserPlugin({ // 开启并行压缩
         parallel: 4
